@@ -1,27 +1,28 @@
 {
   "compilerOptions": {
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-    "target": "ES2022",
-    "useDefineForClassFields": true,
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo", // 指定tsbuildinfo文件的路径
+    "target": "ES2022", // 编译目标为ES2022
+    "useDefineForClassFields": true, // 使用Object.defineProperty定义class字段
+    "lib": ["ES2022", "DOM", "DOM.Iterable"], // 包含的库文件
+    "module": "ESNext", // 模块系统为ESNext
+    "skipLibCheck": true, // 跳过声明文件的类型检查
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": true,
-    "moduleDetection": "force",
-    "noEmit": true,
-    "jsx": "react-jsx",
+    "moduleResolution": "bundler", // 模块解析策略为bundler
+    "allowImportingTsExtensions": true, // 允许导入ts扩展名
+    "verbatimModuleSyntax": true, // 保留模块导入/导出语法
+    "moduleDetection": "force", // 强制模块检测
+    "noEmit": true, // 不生成输出文件
+    "jsx": "react-jsx", // JSX的处理方式为react-jsx
 
     /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "strict": true, // 启用所有严格类型检查选项
+    "noUnusedLocals": true, // 报告未使用的局部变量错误
+    "noUnusedParameters": true, // 报告未使用的函数参数错误
+    "erasableSyntaxOnly": true, // 只移除类型注解，不进行转换
+    "noFallthroughCasesInSwitch": true, // 报告switch语句中的fallthrough错误
+    "noUncheckedSideEffectImports": true // 检查副作用导入
   },
-  "include": ["src"]
+  "include": ["src"], // 包含src目录下的文件
+  "exclude": ["node_modules", "test"] // 排除node_modules和test目录
 }

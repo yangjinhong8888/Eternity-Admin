@@ -1,0 +1,117 @@
+/**
+ * 彻底清除浏览器默认样式，适用于白手起家的全定制项目
+ * 注意：该方案不提供任何视觉样式，仅保证跨浏览器一致的空白状态
+ */
+
+// 全局硬性重置
+*,
+*::before,
+*::after {
+  box-sizing: border-box;      // 重置盒模型为 border-box
+  margin: 0;                   // 清除边距
+  padding: 0;                  // 清除内边距
+  border: 0;                  // 清除边框
+  font-size: 100%;            // 移除浏览器字号缩放
+  vertical-align: baseline;   // 清除垂直对齐样式
+}
+
+html {
+  line-height: 1.15;          // 防止移动端字号缩放问题
+  -webkit-text-size-adjust: 100%; // 禁用iOS自动调整字号
+}
+
+body {
+  line-height: 1;             // 重置行高基线
+  -webkit-font-smoothing: antialiased; // 优化字体渲染
+}
+
+// 标题标签彻底清零
+h1, h2, h3, h4, h5, h6 {
+  font-size: 1rem;             // 清除标题字号差异
+  font-weight: normal;        // 移除粗体样式
+}
+
+// 列表标签清零
+ul, ol, li {
+  list-style: none;           // 移除列表符号和缩进
+}
+
+// 链接重置
+a {
+  color: inherit;             // 继承父级颜色
+  text-decoration: none;      // 删除下划线
+  background-color: transparent; // 清除点击高亮
+}
+
+// 媒体元素重置
+img,
+embed,
+object,
+video,
+iframe {
+  max-width: 100%;            // 防止溢出容器
+  height: auto;               // 保持原始宽高比
+  display: block;             // 解决图片底部空隙问题
+}
+
+// 表格样式归零
+table {
+  border-collapse: collapse;  // 合并边框
+  border-spacing: 0;          // 清除单元格间距
+}
+
+// 表单元素原子级重置
+button,
+input,
+optgroup,
+select,
+textarea {
+  appearance: none;          // 清除系统默认样式
+  background: none;           // 清除背景色
+  border-radius: 0;           // 去除圆角
+  color: inherit;             // 继承字体颜色
+  font: inherit;              // 继承字体样式
+  line-height: inherit;       // 继承行高
+  outline: none;              // 去除焦点外框
+}
+
+// 禁用文本域resize
+textarea {
+  resize: none;
+}
+
+// 清除按钮默认阴影
+button {
+  cursor: pointer;            // 统一指针样式
+  user-select: none;          // 防止文本选择
+}
+
+// 移除输入框自动填充背景色
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  box-shadow: 0 0 0 1000px white inset; // 改用浅色背景
+}
+
+
+//全局滚动条样式
+/* 宽 */
+::-webkit-scrollbar {
+  width: 0.4rem;
+}
+/* 轨道 */
+::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 0.4rem;
+}
+
+/* 滑块 */
+::-webkit-scrollbar-thumb {
+  background: #a0a0a0;
+  border-radius: 0.4rem;
+}
+
+/* 鼠标悬停时的滑块 */
+::-webkit-scrollbar-thumb:hover {
+  background: #666666;
+}
