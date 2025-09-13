@@ -2,16 +2,20 @@ import {Outlet} from "react-router";
 import {DesktopOutlined, FileOutlined, PieChartOutlined, TeamOutlined, UserOutlined} from '@ant-design/icons';
 import {Grid, Layout, Menu, type MenuProps} from 'antd';
 import * as React from "react";
-import {useState, useEffect, useRef} from "react";
+import {useState, useEffect, useRef, useContext} from "react";
 import "./AdminLayout.less";
 import AdminHeader from "./Header/AdminHeader.tsx";
 import AdminFooter from "./Footer/AdminFooter.tsx";
+import {CssContext} from "../../config/context.tsx";
 
 const {Header, Content, Footer, Sider} = Layout;
 type MenuItem = Required<MenuProps>['items'][number];
 
 
 const AdminLayout: React.FC = () => {
+  const { getPrefixCls } = useContext(CssContext)
+  const prefixCls = getPrefixCls('layout');
+
   const {lg} = Grid.useBreakpoint();
   const [sidebarCollapsed, setSideBarCollapsed] = useState<boolean>(!lg); // 默认收起侧边栏
   const isInitialBreakpoint = useRef(true);   // 记录是否是第一次加载断点，避免初始化时lg为undefined导致的Sider闪烁
@@ -61,28 +65,28 @@ const AdminLayout: React.FC = () => {
   }, [lg]);
 
   return (
-    <Layout className={"admin-layout"}>
+    <Layout className={`${prefixCls}`}>
       {
         lg !== undefined &&
         <Sider
-          className={"sidebar"}
+          className={`${prefixCls}-sider`}
           collapsible
           collapsedWidth={80}
           collapsed={isInitialBreakpoint.current ? !lg : sidebarCollapsed}
           onCollapse={(value) => setSideBarCollapsed(value)}
         >
-          <div className={'logo'}></div>
+          <div className={`${prefixCls}-sider-logo`}></div>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={[items[0]?.key as string]} items={items}/>
         </Sider>
       }
-      <Layout className={"content-layout"}>
-        <Header className={"header"}>
+      <Layout className={`${prefixCls}-content`}>
+        <Header className={`${prefixCls}-content-header`}>
           <AdminHeader/>
         </Header>
-        <Content className={"content"}>
+        <Content className={`${prefixCls}-content-page`}>
           <Outlet/>
         </Content>
-        <Footer className={"footer"}>
+        <Footer className={`${prefixCls}-content-footer`}>
           <AdminFooter/>
         </Footer>
       </Layout>

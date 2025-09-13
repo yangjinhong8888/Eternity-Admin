@@ -1,6 +1,13 @@
+import {useContext} from "react";
+import {CssContext} from "../../config/context.tsx";
+
 function Login() {
+  const { getPrefixCls } = useContext(CssContext)
+  const prefixCls = getPrefixCls('home-page');
   return (
-      <>我是登录页面</>
+      <div className={`${prefixCls}`}>
+        <h1>Login</h1>
+      </div>
   )
 }
 

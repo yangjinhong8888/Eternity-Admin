@@ -1,34 +1,35 @@
-.admin-layout{
-  .sidebar{
+@import "@/assets/styles/variables.less";
+@eternity-prefix-layout: ~'@{eternity-prefix}-layout';
+
+.@{eternity-prefix-layout}{
+  &-sider{
     height: calc(100vh - 3rem);
     position: sticky;
     top: 0;
     overflow: auto;
-    .logo{
+    &-logo{
       height: 32px;
       margin: 16px;
       background: rgba(255, 255, 255, 0.2);
     }
   }
-  .content-layout{
+  &-content{
     min-height: 100vh;
-    .header{
+    &-header{
       position: sticky;
       top: 0;
       padding: 0;
       background-color: #fff;
     }
 
-    .content{
+    &-page{
       margin: 24px 16px;
     }
 
-    .footer{
+    &-footer{
       padding: 0;
       background-color: #fff;
     }
   }
-
-
 
 }
