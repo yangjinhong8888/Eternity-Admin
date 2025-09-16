@@ -2,17 +2,17 @@ import {Outlet} from "react-router";
 import {DesktopOutlined, FileOutlined, PieChartOutlined, TeamOutlined, UserOutlined} from '@ant-design/icons';
 import {Grid, Layout, Menu, type MenuProps} from 'antd';
 import * as React from "react";
-import {useState, useEffect, useRef, useContext} from "react";
+import {useState, useEffect, useRef, useContext, type FC} from "react";
 import "./AdminLayout.less";
 import AdminHeader from "./Header/AdminHeader.tsx";
 import AdminFooter from "./Footer/AdminFooter.tsx";
-import {CssContext} from "../../config/context.tsx";
+import {CssContext} from "@/config/context.tsx";
 
 const {Header, Content, Footer, Sider} = Layout;
 type MenuItem = Required<MenuProps>['items'][number];
 
 
-const AdminLayout: React.FC = () => {
+const AdminLayout: FC = () => {
   const { getPrefixCls } = useContext(CssContext)
   const prefixCls = getPrefixCls('layout');
 

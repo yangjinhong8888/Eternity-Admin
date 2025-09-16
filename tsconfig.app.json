@@ -21,7 +21,12 @@
     "noUnusedParameters": true, // 报告未使用的函数参数错误
     "erasableSyntaxOnly": true, // 只移除类型注解，不进行转换
     "noFallthroughCasesInSwitch": true, // 报告switch语句中的fallthrough错误
-    "noUncheckedSideEffectImports": true // 检查副作用导入
+    "noUncheckedSideEffectImports": true, // 检查副作用导入
+    "baseUrl": ".", // 模块导入的基路径
+    "paths": { // 路径映射
+      "@/*": ["src/*"], // 映射@开头的导入路径
+      "@assets/*": ["src/assets/*"] // 映射@assets开头的导入路径
+    }
   },
   "include": ["src"], // 包含src目录下的文件
   "exclude": ["node_modules", "test"] // 排除node_modules和test目录

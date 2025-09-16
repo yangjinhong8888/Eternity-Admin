@@ -17,5 +17,8 @@ export const themeConfig = {
     screenXSMax: 639,
     screenXS: 576,
     screenXSMin: 576,
+
+    fontFamily: "'EternityFont', serif",
+    fontSize: 16
   }
 }

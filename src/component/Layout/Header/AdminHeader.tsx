@@ -1,10 +1,9 @@
-import * as React from "react";
 import "./AdminHeader.less";
 import {Flex} from "antd";
-import {useContext} from "react";
-import {CssContext} from "../../../config/context.tsx";
+import {type FC, useContext} from "react";
+import {CssContext} from "@/config/context.tsx";
 
-const AdminHeader: React.FC = () => {
+const AdminHeader: FC = () => {
   const { getPrefixCls } = useContext(CssContext)
   const prefixCls = getPrefixCls('header');
   return (
