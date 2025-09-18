@@ -1,7 +1,7 @@
 {
   "files": [],
   "references": [
-    { "path": "./tsconfig.app.json" },  // 引用前端配置
-    { "path": "./tsconfig.node.json" }  // 引用 Node.js 配置Node工具代码编译使用，比如编译vite配置（使用ts编写）
+    { "path": "./tsconfig.app.json" }, // 引用前端配置
+    { "path": "./tsconfig.node.json" } // 引用 Node.js 配置Node工具代码编译使用，比如编译vite配置（使用ts编写）
   ]
 }

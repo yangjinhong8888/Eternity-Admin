@@ -20,7 +20,6 @@ Eternity是一个全技术栈的博客系统，基于SpringBoot + React构建，
 
 后端：**Spring Boot**、Spring Security、Mybatis Plus、Redis、MySQL、Slf4J、Swagger
 
-
 ### 项目初衷
 
 个人对编程非常感兴趣，为了了解更多更新的技术栈，创建了这个项目，用于了解和学习市面上最火热的技术和框架，让自己时刻保持学习姿态。

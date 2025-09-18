@@ -23,7 +23,8 @@
     "noFallthroughCasesInSwitch": true, // 报告switch语句中的fallthrough错误
     "noUncheckedSideEffectImports": true, // 检查副作用导入
     "baseUrl": ".", // 模块导入的基路径
-    "paths": { // 路径映射
+    "paths": {
+      // 路径映射
       "@/*": ["src/*"], // 映射@开头的导入路径
       "@assets/*": ["src/assets/*"] // 映射@assets开头的导入路径
     }
