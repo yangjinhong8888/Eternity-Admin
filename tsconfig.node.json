@@ -1,25 +1,42 @@
 {
   "compilerOptions": {
+    // 构建信息文件位置
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    // 目标 ECMAScript 版本
     "target": "ES2023",
+    // 包含的库文件
     "lib": ["ES2023"],
+    // 模块系统
     "module": "ESNext",
+    // 跳过库检查
     "skipLibCheck": true,
 
     /* Bundler mode */
+    // 模块解析策略
     "moduleResolution": "bundler",
+    // 允许导入 TypeScript 扩展
     "allowImportingTsExtensions": true,
+    // 精确的模块语法
     "verbatimModuleSyntax": true,
+    // 强制模块检测
     "moduleDetection": "force",
+    // 不生成输出文件
     "noEmit": true,
 
     /* Linting */
+    // 启用严格模式
     "strict": true,
+    // 检查未使用的局部变量
     "noUnusedLocals": true,
+    // 检查未使用的参数
     "noUnusedParameters": true,
+    // 只启用可擦除语法
     "erasableSyntaxOnly": true,
+    // 防止 switch 语句中的 fallthrough
     "noFallthroughCasesInSwitch": true,
+    // 检查未检查的副作用导入
     "noUncheckedSideEffectImports": true
   },
+  // 包含的文件
   "include": ["vite.config.ts"]
 }

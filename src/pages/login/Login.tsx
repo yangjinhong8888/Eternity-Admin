@@ -2,21 +2,28 @@ import { type FC, useContext } from "react"
 import { CssContext } from "@/config/context.tsx"
 import "./Login.less"
 import { Button, Form, type FormProps, Input } from "antd"
+import { userService } from "@/services/userService.ts"
+
+interface LoginInfo {
+  username: string
+  password: string
+}
 
 const Login: FC = () => {
-  type FieldType = {
-    username: string
-    password: string
-  }
-
+  // 获取css前缀
   const { getPrefixCls } = useContext(CssContext)
   const prefixCls = getPrefixCls("login-page")
 
-  const onFinish: FormProps<FieldType>["onFinish"] = values => {
+  const onFinish: FormProps<LoginInfo>["onFinish"] = (values) => {
     console.log("Success:", values)
+    userService.login({username: values.username, password: values.password}).then(res=>{
+      console.log("Success:", res)
+    }).catch(error => {
+      console.log("Error:", error)
+    })
   }
 
-  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = errorInfo => {
+  const onFinishFailed: FormProps<LoginInfo>["onFinishFailed"] = (errorInfo) => {
     console.log("Failed:", errorInfo)
   }
 
@@ -25,7 +32,7 @@ const Login: FC = () => {
       <div className={`${prefixCls}-container`}>
         <div className={`${prefixCls}-container-card`}>
           <div className={`${prefixCls}-container-card-title`}>用户登录</div>
-          <Form<FieldType>
+          <Form<LoginInfo>
             name="basic"
             labelCol={{ span: 6 }}
             wrapperCol={{ span: 16 }}
@@ -35,7 +42,7 @@ const Login: FC = () => {
             onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
-            <Form.Item<FieldType>
+            <Form.Item<LoginInfo>
               label="用户名"
               name="username"
               rules={[{ required: true, message: "请输入用户名!" }]}
@@ -43,7 +50,7 @@ const Login: FC = () => {
               <Input />
             </Form.Item>
 
-            <Form.Item<FieldType>
+            <Form.Item<LoginInfo>
               label="密码"
               name="password"
               rules={[{ required: true, message: "请输入密码!" }]}

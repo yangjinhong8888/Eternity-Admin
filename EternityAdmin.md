@@ -71,7 +71,7 @@ export default tseslint.config([
 ## 开发所需配置
 
 ```pnpm
-使用pnpm时务必在.npmrc中配置包提升，否则可能遇到eslint无法正常使用的情况
+使用pnpm时务必在.npmrc中配置包提升（直接copy到配置文件就可以，没有格式），否则可能遇到eslint无法正常使用的情况
 # 基础策略
 auto-install-peers = true
 node-linker = isolated

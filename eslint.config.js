@@ -20,15 +20,22 @@ export default tseslint.config([
     // 针对所有 .ts 和 .tsx 文件应用配置
     files: ["**/*.{ts,tsx}"],
     extends: [
-      js.configs.recommended, // ESLint 推荐的 JavaScript 规则
-      tseslint.configs.recommended, // TypeScript 推荐规则
-      reactHooks.configs["recommended-latest"], // React Hooks 推荐规则
-      reactRefresh.configs.vite, // React Refresh 规则，适用于 Vite 环境
-      prettier, // 添加 Prettier 配置，确保 ESLint 不会与 Prettier 冲突
+      // ESLint 推荐的 JavaScript 规则
+      js.configs.recommended,
+      // TypeScript 推荐规则
+      tseslint.configs.recommended,
+      // React Hooks 推荐规则
+      reactHooks.configs["recommended-latest"],
+      // React Refresh 规则，适用于 Vite 环境
+      reactRefresh.configs.vite,
+      // 添加 Prettier 配置，确保 ESLint 不会与 Prettier 冲突
+      prettier,
     ],
     languageOptions: {
-      ecmaVersion: 2020, // 使用 ECMAScript 2020 语法
-      globals: globals.browser, // 定义浏览器全局变量
+      // 使用 ECMAScript 2020 语法
+      ecmaVersion: 2020,
+      // 定义浏览器全局变量
+      globals: globals.browser,
     },
   },
 ])

@@ -1,4 +1,4 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# 查看 https://help.github.com/articles/ignoring-files/ 了解更多关于忽略文件的信息
 
 ### IntelliJ IDEA ###
 /.idea/
@@ -13,7 +13,7 @@
 ### VS Code ###
 .vscode/*
 
-# dependencies
+# 依赖包
 node_modules/
 .pnp/
 .pnp.*
@@ -24,21 +24,21 @@ pnpm-store/
 !.yarn/releases
 !.yarn/versions
 
-# testing
+# 测试覆盖报告
 /coverage
 
 # next.js
 /.next/
 /out/
 
-# production
+# 生产构建
 /build
 /dist
 
 ### Mac OS ###
 .DS_Store
 
-# debug
+# 调试日志
 logs
 *.log
 npm-debug.log*
@@ -48,8 +48,8 @@ pnpm-debug.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# 本地环境变量文件
+.env*.local
 
 # vercel
 .vercel
@@ -59,7 +59,5 @@ lerna-debug.log*
 next-env.d.ts
 
 # ----- 开发环境变量 -----
-.env
 .env.local
-.env.development
-.env.production
+.env.*.local
