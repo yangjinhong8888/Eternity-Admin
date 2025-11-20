@@ -7,6 +7,7 @@ import axios, {
   type InternalAxiosRequestConfig,
   type AxiosRequestConfig,
 } from "axios"
+import router from "@/routes/router.tsx"
 
 /**
  * HTTP客户端配置接口
@@ -186,7 +187,7 @@ class HttpClient {
         // 直接返回响应体数据
         return res
       },
-      (error: AxiosError) => {
+      async (error: AxiosError) => {
         // 统一处理HTTP错误
         console.error("🌐 网络错误:", error.message)
 
@@ -195,6 +196,7 @@ class HttpClient {
           switch (error.response.status) {
             case 401:
               console.warn("身份验证失败")
+              await router.navigate("/login")
               break
             case 403:
               console.warn("权限不足")

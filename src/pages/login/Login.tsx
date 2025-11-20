@@ -24,14 +24,6 @@ const Login: FC = () => {
       .catch(error => {
         console.log("Error:", error)
       })
-    userService
-      .getUserInfo()
-      .then(res => {
-        console.log("Success:", res)
-      })
-      .catch(error => {
-        console.log("Error:", error)
-      })
   }
 
   const onFinishFailed: FormProps<LoginInfo>["onFinishFailed"] = errorInfo => {
