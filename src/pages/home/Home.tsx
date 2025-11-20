@@ -7,7 +7,7 @@ const Home: FC = () => {
   const { getPrefixCls } = useContext(CssContext)
   const prefixCls = getPrefixCls("home-page")
 
-  useEffect(()=>{
+  useEffect(() => {
     userService
       .getUserInfo()
       .then(res => {
