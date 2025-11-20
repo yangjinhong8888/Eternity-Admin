@@ -1,4 +1,4 @@
-import httpClient from "@/config/request.ts"
+import httpClient from "@/utils/request/request.ts"
 
 interface LoginParams {
   username: string
@@ -8,8 +8,13 @@ interface LoginParams {
 export const userService = {
   login: (data: LoginParams) => {
     return httpClient.post<LoginParams, null>({
-      url: '/user/login',
+      url: "/user/login",
       data,
     })
-  }
+  },
+  getUserInfo: () => {
+    return httpClient.post<LoginParams, null>({
+      url: "/user/getUserInfo",
+    })
+  },
 }

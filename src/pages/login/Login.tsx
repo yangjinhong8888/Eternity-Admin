@@ -1,5 +1,5 @@
 import { type FC, useContext } from "react"
-import { CssContext } from "@/config/context.tsx"
+import { CssContext } from "@/store/context/CssPrefixContext.tsx"
 import "./Login.less"
 import { Button, Form, type FormProps, Input } from "antd"
 import { userService } from "@/services/userService.ts"
@@ -14,16 +14,27 @@ const Login: FC = () => {
   const { getPrefixCls } = useContext(CssContext)
   const prefixCls = getPrefixCls("login-page")
 
-  const onFinish: FormProps<LoginInfo>["onFinish"] = (values) => {
+  const onFinish: FormProps<LoginInfo>["onFinish"] = values => {
     console.log("Success:", values)
-    userService.login({username: values.username, password: values.password}).then(res=>{
-      console.log("Success:", res)
-    }).catch(error => {
-      console.log("Error:", error)
-    })
+    userService
+      .login({ username: values.username, password: values.password })
+      .then(res => {
+        console.log("Success:", res)
+      })
+      .catch(error => {
+        console.log("Error:", error)
+      })
+    userService
+      .getUserInfo()
+      .then(res => {
+        console.log("Success:", res)
+      })
+      .catch(error => {
+        console.log("Error:", error)
+      })
   }
 
-  const onFinishFailed: FormProps<LoginInfo>["onFinishFailed"] = (errorInfo) => {
+  const onFinishFailed: FormProps<LoginInfo>["onFinishFailed"] = errorInfo => {
     console.log("Failed:", errorInfo)
   }
 

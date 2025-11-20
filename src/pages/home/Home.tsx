@@ -1,6 +1,6 @@
 import "./Home.less"
 import { type FC, useContext } from "react"
-import { CssContext } from "@/config/context.tsx"
+import { CssContext } from "@/store/context/CssPrefixContext.tsx"
 
 const Home: FC = () => {
   const { getPrefixCls } = useContext(CssContext)

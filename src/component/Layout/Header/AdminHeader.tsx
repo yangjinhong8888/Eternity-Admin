@@ -1,7 +1,7 @@
 import "./AdminHeader.less"
 import { Flex } from "antd"
 import { type FC, useContext } from "react"
-import { CssContext } from "@/config/context.tsx"
+import { CssContext } from "@/store/context/CssPrefixContext.tsx"
 
 const AdminHeader: FC = () => {
   const { getPrefixCls } = useContext(CssContext)

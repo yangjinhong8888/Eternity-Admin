@@ -12,7 +12,7 @@ import { useState, useEffect, useRef, useContext, type FC } from "react"
 import "./AdminLayout.less"
 import AdminHeader from "./Header/AdminHeader.tsx"
 import AdminFooter from "./Footer/AdminFooter.tsx"
-import { CssContext } from "@/config/context.tsx"
+import { CssContext } from "@/store/context/CssPrefixContext.tsx"
 
 const { Header, Content, Footer, Sider } = Layout
 type MenuItem = Required<MenuProps>["items"][number]

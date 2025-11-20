@@ -13,16 +13,16 @@ export default defineConfig({
     allowedHosts: [], // 可配置允许的hostname
     // 开发服务器代理配置，用于解决开发环境下的跨域问题（同时解决跨域下cookie不能存储）
     // 将 /admin 开头的请求代理到后端服务
-    proxy:{
-      '/admin/': {
+    proxy: {
+      "/admin/": {
         // 代理目标地址，需要配置实际的后端服务地址
         target: "http://127.0.0.1:8080",
         // 是否改变请求头中的 origin 字段，设置为 true 以适应某些安全策略
         changeOrigin: true,
         // 重写请求路径，移除 /admin 前缀
-        rewrite: (path) => path.replace(/^\/admin/, '')
-      }
-    }
+        rewrite: path => path.replace(/^\/admin/, ""),
+      },
+    },
   },
   css: {
     // 配置 CSS 预处理器选项
@@ -37,11 +37,11 @@ export default defineConfig({
     lightningcss: {
       // 设置目标浏览器版本，用于自动添加浏览器前缀和转译新特性
       targets: {
-        android: 64,   // Android 8.0+
-        chrome: 64,    // Chrome 64+
-        edge: 79,      // Edge 79+
-        firefox: 67,   // Firefox 67+
-        safari: 12,    // Safari 12+
+        android: 64, // Android 8.0+
+        chrome: 64, // Chrome 64+
+        edge: 79, // Edge 79+
+        firefox: 67, // Firefox 67+
+        safari: 12, // Safari 12+
       },
     },
   },
@@ -57,5 +57,5 @@ export default defineConfig({
   // 指定环境变量文件所在的目录
   envDir: path.resolve(__dirname, "./src/environment"),
   // 设置环境变量的前缀，只有以此前缀开头的变量才会被注入到客户端
-  envPrefix: "ETERNITY_"
+  envPrefix: "ETERNITY_",
 })

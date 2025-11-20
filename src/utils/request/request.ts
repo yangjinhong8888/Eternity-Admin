@@ -28,7 +28,7 @@ interface InstanceConfig {
  * 定义了服务端返回数据的标准格式
  * @template T - 响应数据的具体类型
  */
-interface IResult<T> {
+interface IResult<T = unknown> {
   /**
    * 状态码，用于表示请求处理的结果
    */
@@ -36,7 +36,7 @@ interface IResult<T> {
   /**
    * 实际的业务数据
    */
-  data: T
+  data?: T
   /**
    * 描述信息或错误消息
    */
@@ -48,7 +48,7 @@ interface IResult<T> {
  * 定义发起HTTP请求时可配置的参数
  * @template T - 请求体数据或查询参数的类型
  */
-interface ReqParameter<T, R> {
+interface ReqParameter<T = unknown, R = unknown> {
   /**
    * 请求的URL路径
    */
@@ -82,7 +82,7 @@ interface ReqParameter<T, R> {
   /**
    * 响应数据类型设置
    */
-  responseType?: ResponseType,
+  responseType?: ResponseType
   /**
    * 是否携带凭证信息（如cookies）
    * 设置为true时会在跨域请求中携带凭据
@@ -95,13 +95,13 @@ interface ReqParameter<T, R> {
  * 扩展基础请求参数，增加请求方法字段
  * @template T - 请求体数据或查询参数的类型
  */
-interface ReqParameterCustom<T> extends ReqParameter<T> {
+interface ReqParameterCustom<T = unknown, R = unknown>
+  extends ReqParameter<T, R> {
   /**
    * HTTP请求方法（GET/POST/PUT/DELETE等）
    */
   method: Method
 }
-
 
 /**
  * HTTP客户端类
@@ -123,14 +123,14 @@ class HttpClient {
    */
   private constructor(config: InstanceConfig = {}) {
     // 环境变量类型安全处理
-    const baseURL = config.baseURL || ''
+    const baseURL = config.baseURL || ""
 
     this.axiosInstance = axios.create({
       baseURL,
       headers: {
-        'Content-Type': 'application/json;charset=utf-8',
+        "Content-Type": "application/json;charset=utf-8",
       },
-      timeout: config.timeout || 30000
+      timeout: config.timeout || 30000,
     })
 
     this.initInterceptors()
@@ -157,7 +157,9 @@ class HttpClient {
     this.axiosInstance.interceptors.request.use(
       (config: InternalAxiosRequestConfig) => {
         // 可在此添加认证token、全局loading等
-        console.log(`🚀 发起请求: ${config.method?.toUpperCase()} ${config.url}`)
+        console.log(
+          `🚀 发起请求: ${config.method?.toUpperCase()} ${config.url}`
+        )
         return config
       },
       (error: AxiosError) => Promise.reject(error)
@@ -169,7 +171,7 @@ class HttpClient {
         const res = response.data
 
         // 这里做一些基础的网络请求处理
-        if (typeof res === 'object' && res !== null && 'code' in res) {
+        if (typeof res === "object" && res !== null && "code" in res) {
           const businessResult = res as IResult
 
           // 业务错误处理 (400-599 为错误码范围)
@@ -177,7 +179,7 @@ class HttpClient {
             // 特殊处理未授权错误
             if (businessResult.code === 401) {
               // 触发未授权回调或跳转登录页
-              console.warn('未授权访问，请重新登录')
+              console.warn("未授权访问，请重新登录")
             }
           }
         }
@@ -186,28 +188,28 @@ class HttpClient {
       },
       (error: AxiosError) => {
         // 统一处理HTTP错误
-        console.error('🌐 网络错误:', error.message)
+        console.error("🌐 网络错误:", error.message)
 
         // 可以根据状态码进行特殊处理
         if (error.response) {
           switch (error.response.status) {
             case 401:
-              console.warn('身份验证失败')
+              console.warn("身份验证失败")
               break
             case 403:
-              console.warn('权限不足')
+              console.warn("权限不足")
               break
             case 404:
-              console.warn('请求资源不存在')
+              console.warn("请求资源不存在")
               break
             case 500:
-              console.error('服务器内部错误')
+              console.error("服务器内部错误")
               break
             default:
               console.error(`HTTP错误: ${error.response.status}`)
           }
         } else if (error.request) {
-          console.error('网络连接失败，请检查网络')
+          console.error("网络连接失败，请检查网络")
         }
 
         return Promise.reject(error)
@@ -234,19 +236,19 @@ class HttpClient {
     }
 
     // 根据请求方法设置参数
-    if (method.toLowerCase() === 'get') {
+    if (method.toLowerCase() === "get") {
       config.params = params.data
     } else {
       config.data = params.data
     }
 
     try {
-      const res = await this.axiosInstance.request<IResult<T>>(config)
+      const res = await this.axiosInstance.request<R, IResult<R>>(config)
       params.success?.(res)
       return res
     } catch (error) {
       // 统一错误处理
-      params.error?.(error as IResult<T> | AxiosError)
+      params.error?.(error as IResult<R> | AxiosError)
       throw error
     }
   }
@@ -257,8 +259,8 @@ class HttpClient {
    * @param params - 请求参数配置
    * @returns Promise<IResult<T>>> - 返回axios响应Promise
    */
-  public async get<T, R>(params: ReqParameter<T>): Promise<IResult<R>> {
-    return this.request<T, R>('GET', params)
+  public async get<T, R>(params: ReqParameter<T, R>): Promise<IResult<R>> {
+    return this.request<T, R>("GET", params)
   }
 
   /**
@@ -267,8 +269,8 @@ class HttpClient {
    * @param params - 请求参数配置
    * @returns Promise<IResult<T>> - 返回axios响应Promise
    */
-  public async post<T, R>(params: ReqParameter<T>): Promise<IResult<R>> {
-    return this.request<T, R>('POST', params)
+  public async post<T, R>(params: ReqParameter<T, R>): Promise<IResult<R>> {
+    return this.request<T, R>("POST", params)
   }
 
   /**
@@ -277,8 +279,8 @@ class HttpClient {
    * @param params - 请求参数配置
    * @returns Promise<IResult<T>> - 返回axios响应Promise
    */
-  public async put<T, R>(params: ReqParameter<T>): Promise<IResult<R>> {
-    return this.request<T, R>('PUT', params)
+  public async put<T, R>(params: ReqParameter<T, R>): Promise<IResult<R>> {
+    return this.request<T, R>("PUT", params)
   }
 
   /**
@@ -287,8 +289,8 @@ class HttpClient {
    * @param params - 请求参数配置
    * @returns Promise<IResult<T>> - 返回axios响应Promise
    */
-  public async delete<T, R>(params: ReqParameter<T>): Promise<IResult<R>> {
-    return this.request<T, R>('DELETE', params)
+  public async delete<T, R>(params: ReqParameter<T, R>): Promise<IResult<R>> {
+    return this.request<T, R>("DELETE", params)
   }
 
   /**
@@ -297,8 +299,8 @@ class HttpClient {
    * @param params - 请求参数配置
    * @returns Promise<IResult<T>> - 返回axios响应Promise
    */
-  public async patch<T, R>(params: ReqParameter<T>): Promise<IResult<R>> {
-    return this.request<T, R>('PATCH', params)
+  public async patch<T, R>(params: ReqParameter<T, R>): Promise<IResult<R>> {
+    return this.request<T, R>("PATCH", params)
   }
 
   /**
@@ -307,10 +309,12 @@ class HttpClient {
    * @param params - 自定义请求参数配置
    * @returns Promise<IResult<T>> - 返回axios响应Promise
    */
-  public async custom<T, R>(params: ReqParameterCustom<T>): Promise<IResult<R>> {
+  public async custom<T, R>(
+    params: ReqParameterCustom<T, R>
+  ): Promise<IResult<R>> {
     return this.request<T, R>(params.method, params)
   }
-  
+
   /**
    * 获取原始axios实例
    * 用于需要直接使用axios的特殊场景
@@ -319,12 +323,11 @@ class HttpClient {
   public getAxiosInstance(): AxiosInstance {
     return this.axiosInstance
   }
-
 }
 
 // 创建默认实例
 const httpClient = HttpClient.getInstance({
-  baseURL: (import.meta.env.ETERNITY_BASE_URL as string),
+  baseURL: import.meta.env.ETERNITY_BASE_URL as string,
 })
 
 export default httpClient
