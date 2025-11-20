@@ -55,7 +55,7 @@ export default defineConfig({
     },
   },
   // 指定环境变量文件所在的目录
-  envDir: path.resolve(__dirname, "./src/environment"),
+  envDir: path.resolve(__dirname, "./src/config/environment"),
   // 设置环境变量的前缀，只有以此前缀开头的变量才会被注入到客户端
   envPrefix: "ETERNITY_",
 })
