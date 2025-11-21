@@ -3,6 +3,7 @@ import { CssContext } from "@/store/context/CssPrefixContext.tsx"
 import "./Login.less"
 import { Button, Form, type FormProps, Input } from "antd"
 import { userService } from "@/services/userService.ts"
+import { useNavigate } from "react-router"
 
 interface LoginInfo {
   username: string
@@ -14,11 +15,13 @@ const Login: FC = () => {
   const { getPrefixCls } = useContext(CssContext)
   const prefixCls = getPrefixCls("login-page")
 
+  const navigate = useNavigate();
   const onFinish: FormProps<LoginInfo>["onFinish"] = values => {
     console.log("Success:", values)
     userService
       .login({ username: values.username, password: values.password })
       .then(res => {
+        navigate("/");
         console.log("Success:", res)
       })
       .catch(error => {

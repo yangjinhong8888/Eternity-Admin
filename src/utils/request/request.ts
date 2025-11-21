@@ -175,14 +175,8 @@ class HttpClient {
         if (typeof res === "object" && res !== null && "code" in res) {
           const businessResult = res as IResult
 
-          // 业务错误处理 (400-599 为错误码范围)
-          if (businessResult.code >= 400 && businessResult.code < 600) {
-            // 特殊处理未授权错误
-            if (businessResult.code === 401) {
-              // 触发未授权回调或跳转登录页
-              console.warn("未授权访问，请重新登录")
-            }
-          }
+          // 业务错误处理 自定义错误码)
+          if (businessResult.code >= 1000 && businessResult.code < 6000) { /* empty */ }
         }
         // 直接返回响应体数据
         return res
