@@ -8,11 +8,13 @@ const router = createBrowserRouter([
   {
     path: "/",
     Component: AdminLayout,
+    id: "root",
+    // 用于验证当前是否登录，如未登录则直接跳转到login页面
+    loader: userInfoLoader,
     children: [
       {
         index: true,
         Component: Home,
-        loader: userInfoLoader,
       },
     ],
   },

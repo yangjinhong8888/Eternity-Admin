@@ -1,17 +1,17 @@
 import "./Home.less"
 import { type FC, useContext } from "react"
 import { CssContext } from "@/store/context/CssPrefixContext"
-import { useLoaderData } from "react-router"
+import { useRouteLoaderData } from "react-router"
 
 const Home: FC = () => {
   const { getPrefixCls } = useContext(CssContext)
   const prefixCls = getPrefixCls("home-page")
-  const userInfo = useLoaderData()
+  const userInfo = useRouteLoaderData("root")
 
   return (
     <div className={`${prefixCls}`}>
       <div>Hello, Eternity Admin!</div>
-      <div>{userInfo.username}</div>
+      <div>{userInfo?.username}</div>
     </div>
   )
 }
