@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    // 是否输出声明文件
+    "noEmit": true,
+
     // 构建信息文件位置
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     // 目标 ECMAScript 版本
@@ -20,8 +23,6 @@
     "verbatimModuleSyntax": true,
     // 强制模块检测
     "moduleDetection": "force",
-    // 不生成输出文件
-    "noEmit": true,
 
     /* Linting */
     // 启用严格模式

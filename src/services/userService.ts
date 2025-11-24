@@ -5,6 +5,10 @@ interface LoginParams {
   password: string
 }
 
+export interface UserInfo {
+  username: string
+}
+
 export const userService = {
   login: (data: LoginParams) => {
     return httpClient.post<LoginParams, null>({
@@ -13,7 +17,7 @@ export const userService = {
     })
   },
   getUserInfo: () => {
-    return httpClient.post<LoginParams, null>({
+    return httpClient.post<LoginParams, UserInfo>({
       url: "/user/getUserInfo",
     })
   },
