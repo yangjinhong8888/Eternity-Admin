@@ -7,7 +7,7 @@ import axios, {
   type InternalAxiosRequestConfig,
   type AxiosRequestConfig,
 } from "axios"
-import router from "@/routes/router.tsx"
+import router from "@/routes/router"
 import { message } from "antd"
 
 /**
@@ -177,7 +177,9 @@ class HttpClient {
           const businessResult = res as IResult
 
           // 业务错误处理 自定义错误码)
-          if (businessResult.code >= 1000 && businessResult.code < 6000) { /* empty */ }
+          if (businessResult.code >= 1000 && businessResult.code < 6000) {
+            /* empty */
+          }
         }
         // 直接返回响应体数据
         return res
@@ -190,10 +192,10 @@ class HttpClient {
         if (error.response) {
           switch (error.response.status) {
             case 400:
-              message.error(error.response.data?.message);
-              break;
+              message.error(error.response.data?.message)
+              break
             case 401:
-              message.error(error.response.data?.message);
+              message.error(error.response.data?.message)
               await router.navigate("/login")
               break
             case 403:

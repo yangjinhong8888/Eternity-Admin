@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router"
-import Home from "../pages/home/Home.tsx"
-import Login from "../pages/login/Login.tsx"
-import { AdminLayout } from "../component/Layout"
-import { userInfoLoader } from "@/routes/loader.ts"
+import Login from "../pages/login/Login"
+import { AdminLayout } from "@/components/Layout"
+import { userInfoLoader } from "@/routes/loader"
+import Home from "@/pages/home/Home"
 
 const router = createBrowserRouter([
   {
@@ -11,7 +11,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        Component: Home,
         loader: userInfoLoader,
       },
     ],

@@ -1,4 +1,4 @@
-import { userService } from "@/services/userService.ts"
+import { userService } from "@/services/userService"
 
 /**
  * 首页加载时检查用户登录状态
@@ -6,11 +6,11 @@ import { userService } from "@/services/userService.ts"
  */
 export const userInfoLoader = async () => {
   try {
-    const result= await userService.getUserInfo();
-    return result?.data ?? null;
+    const result = await userService.getUserInfo()
+    return result?.data ?? null
   } catch (error) {
     // 处理获取用户信息失败的情况
-    console.error('Failed to fetch user info:', error);
-    return null;
+    console.error("Failed to fetch user info:", error)
+    return null
   }
-};
+}

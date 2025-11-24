@@ -1,10 +1,10 @@
 import { createRoot } from "react-dom/client"
 import { RouterProvider } from "react-router"
-import router from "./routes/router.tsx"
+import router from "./routes/router"
 import "@ant-design/v5-patch-for-react-19"
 import "@assets/styles/common.less"
 import { ConfigProvider } from "antd"
-import { themeConfig } from "./config/antd/themeConfig.tsx"
+import { themeConfig } from "./config/antd/themeConfig"
 
 createRoot(document.getElementById("root")!).render(
   <ConfigProvider theme={themeConfig}>

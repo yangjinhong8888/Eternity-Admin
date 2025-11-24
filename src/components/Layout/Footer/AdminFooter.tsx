@@ -1,7 +1,7 @@
 import "./AdminFooter.less"
 import { Flex } from "antd"
 import { type FC, useContext } from "react"
-import { CssContext } from "@/store/context/CssPrefixContext.tsx"
+import { CssContext } from "@/store/context/CssPrefixContext"
 
 const AdminFooter: FC = () => {
   const { getPrefixCls } = useContext(CssContext)

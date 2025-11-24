@@ -1,4 +1,4 @@
-import httpClient from "@/utils/request/request.ts"
+import httpClient from "@/utils/request/request"
 
 interface LoginParams {
   username: string

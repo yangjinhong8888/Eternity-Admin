@@ -1,6 +1,6 @@
 import "./Home.less"
 import { type FC, useContext } from "react"
-import { CssContext } from "@/store/context/CssPrefixContext.tsx"
+import { CssContext } from "@/store/context/CssPrefixContext"
 import { useLoaderData } from "react-router"
 
 const Home: FC = () => {

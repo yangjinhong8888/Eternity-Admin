@@ -10,9 +10,9 @@ import { Grid, Layout, Menu, type MenuProps } from "antd"
 import * as React from "react"
 import { useState, useEffect, useRef, useContext, type FC } from "react"
 import "./AdminLayout.less"
-import AdminHeader from "./Header/AdminHeader.tsx"
-import AdminFooter from "./Footer/AdminFooter.tsx"
-import { CssContext } from "@/store/context/CssPrefixContext.tsx"
+import AdminHeader from "./Header/AdminHeader"
+import AdminFooter from "./Footer/AdminFooter"
+import { CssContext } from "@/store/context/CssPrefixContext"
 
 const { Header, Content, Footer, Sider } = Layout
 type MenuItem = Required<MenuProps>["items"][number]
