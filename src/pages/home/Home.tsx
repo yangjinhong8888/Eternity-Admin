@@ -1,11 +1,10 @@
-import "./Home.less"
-import { type FC, useContext } from "react"
-import { CssContext } from "@/store/context/CssPrefixContext"
+import { type FC } from "react"
 import { useRouteLoaderData } from "react-router"
+import { usePrefixCls } from "@/hooks/usePrefixCls"
+import "./Home.less"
 
 const Home: FC = () => {
-  const { getPrefixCls } = useContext(CssContext)
-  const prefixCls = getPrefixCls("home-page")
+  const prefixCls = usePrefixCls("home-page")
   const userInfo = useRouteLoaderData("root")
 
   return (

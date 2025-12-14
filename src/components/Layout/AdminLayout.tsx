@@ -1,58 +1,20 @@
+import { useState, useEffect, useRef, type FC } from "react"
 import { Outlet } from "react-router"
-import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from "@ant-design/icons"
-import { Grid, Layout, Menu, type MenuProps } from "antd"
-import * as React from "react"
-import { useState, useEffect, useRef, useContext, type FC } from "react"
+import { Grid, Layout, Menu } from "antd"
+import { usePrefixCls } from "@/hooks/usePrefixCls"
+import { menuItems } from "@/config/menu/menuConfig"
+import AdminHeader from "@/components/Layout/Header/AdminHeader"
+import AdminFooter from "@/components/Layout/Footer/AdminFooter"
 import "./AdminLayout.less"
-import AdminHeader from "./Header/AdminHeader"
-import AdminFooter from "./Footer/AdminFooter"
-import { CssContext } from "@/store/context/CssPrefixContext"
 
 const { Header, Content, Footer, Sider } = Layout
-type MenuItem = Required<MenuProps>["items"][number]
 
 const AdminLayout: FC = () => {
-  const { getPrefixCls } = useContext(CssContext)
-  const prefixCls = getPrefixCls("layout")
+  const prefixCls = usePrefixCls("layout")
 
   const { lg } = Grid.useBreakpoint()
   const [sidebarCollapsed, setSideBarCollapsed] = useState<boolean>(!lg) // 默认收起侧边栏
   const isInitialBreakpoint = useRef(true) // 记录是否是第一次加载断点，避免初始化时lg为undefined导致的Sider闪烁
-
-  const getItem = (
-    label: React.ReactNode,
-    key: React.Key,
-    icon?: React.ReactNode,
-    children?: MenuItem[]
-  ): MenuItem => {
-    return {
-      key,
-      icon,
-      children,
-      label,
-    } as MenuItem
-  }
-
-  const items: MenuItem[] = [
-    getItem("仪表盘", "1", <PieChartOutlined />),
-    getItem("创作", "2", <DesktopOutlined />),
-    getItem("管理", "sub1", <UserOutlined />, [
-      getItem("文章管理", "3"),
-      getItem("标签管理", "4"),
-      getItem("用户管理", "5"),
-    ]),
-    getItem("权限", "sub2", <TeamOutlined />, [
-      getItem("用户权限", "6"),
-      getItem("菜单权限", "8"),
-    ]),
-    getItem("系统", "9", <FileOutlined />),
-  ]
 
   useEffect(() => {
     setSideBarCollapsed(!lg)
@@ -81,8 +43,8 @@ const AdminLayout: FC = () => {
           <Menu
             theme="dark"
             mode="inline"
-            defaultSelectedKeys={[items[0]?.key as string]}
-            items={items}
+            defaultSelectedKeys={[menuItems[0]?.key as string]}
+            items={menuItems}
           />
         </Sider>
       )}

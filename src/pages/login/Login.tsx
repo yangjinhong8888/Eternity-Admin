@@ -1,9 +1,9 @@
-import { type FC, useContext } from "react"
-import { CssContext } from "@/store/context/CssPrefixContext"
-import "./Login.less"
+import { type FC } from "react"
 import { Button, Form, type FormProps, Input } from "antd"
-import { userService } from "@/services/userService"
 import { useNavigate } from "react-router"
+import { usePrefixCls } from "@/hooks/usePrefixCls"
+import { userService } from "@/services/userService"
+import "./Login.less"
 
 interface LoginInfo {
   username: string
@@ -11,9 +11,7 @@ interface LoginInfo {
 }
 
 const Login: FC = () => {
-  // 获取css前缀
-  const { getPrefixCls } = useContext(CssContext)
-  const prefixCls = getPrefixCls("login-page")
+  const prefixCls = usePrefixCls("login-page")
 
   const navigate = useNavigate()
   const onFinish: FormProps<LoginInfo>["onFinish"] = values => {

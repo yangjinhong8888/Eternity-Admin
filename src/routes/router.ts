@@ -1,8 +1,9 @@
 import { createBrowserRouter } from "react-router"
-import Login from "../pages/login/Login"
 import { AdminLayout } from "@/components/Layout"
-import { userInfoLoader } from "@/routes/loader"
 import Home from "@/pages/home/Home"
+import Login from "@/pages/login/Login"
+import NotFound from "@/pages/notfound/NotFound"
+import { userInfoLoader } from "@/routes/loader"
 
 const router = createBrowserRouter([
   {
@@ -24,7 +25,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/404",
-    Component: Login,
+    Component: NotFound,
+  },
+  {
+    path: "*",
+    Component: NotFound,
   },
 ])
 
