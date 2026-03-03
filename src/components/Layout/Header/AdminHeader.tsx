@@ -1,11 +1,10 @@
-import "./AdminHeader.less"
+import { type FC } from "react"
 import { Flex } from "antd"
-import { type FC, useContext } from "react"
-import { CssContext } from "@/store/context/CssPrefixContext"
+import { usePrefixCls } from "@/hooks/usePrefixCls"
+import "./AdminHeader.less"
 
 const AdminHeader: FC = () => {
-  const { getPrefixCls } = useContext(CssContext)
-  const prefixCls = getPrefixCls("header")
+  const prefixCls = usePrefixCls("header")
   return (
     <Flex justify={"space-between"} align={"center"} className={`${prefixCls}`}>
       <Flex>MyLogo</Flex>
