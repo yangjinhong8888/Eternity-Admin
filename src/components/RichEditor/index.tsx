@@ -1,9 +1,11 @@
 import { useEditor, EditorContent } from "@tiptap/react"
 import StarterKit from "@tiptap/starter-kit"
 import Underline from "@tiptap/extension-underline"
-import Image from "@tiptap/extension-image"
+import ImageNode from "./ImageNodeExtension"
 import Link from "@tiptap/extension-link"
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight"
+import Highlight from "@tiptap/extension-highlight"
+import TextAlign from "@tiptap/extension-text-align"
 import { common, createLowlight } from "lowlight"
 import Toolbar from "./Toolbar"
 import "./editor.less"
@@ -29,11 +31,10 @@ const RichEditor: FC<RichEditorProps> = ({
         codeBlock: false,
       }),
       Underline,
-      Image.configure({
-        allowBase64: false,
-        HTMLAttributes: {
-          class: "editor-image",
-        },
+      ImageNode,
+      Highlight,
+      TextAlign.configure({
+        types: ["heading", "paragraph"],
       }),
       Link.configure({
         openOnClick: false,
