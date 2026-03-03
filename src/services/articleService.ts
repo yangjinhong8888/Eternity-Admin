@@ -4,6 +4,7 @@ import httpClient from "@/utils/request/request"
 export interface TagVO {
   id: number
   tagName: string
+  articleCount?: number
 }
 
 export interface ArticleListVO {

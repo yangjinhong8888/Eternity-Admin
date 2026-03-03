@@ -121,7 +121,7 @@ const CreatePage: FC = () => {
         const res = await articleService.create(data)
         if (res?.data) {
           message.success("草稿已保存")
-          navigate(`/create?id=${res.data}`, { replace: true })
+          setTimeout(() => navigate(`/create?id=${res.data}`, { replace: true }), 0)
         }
       }
     } finally {
@@ -141,7 +141,7 @@ const CreatePage: FC = () => {
         const res = await articleService.create({ ...data, status: 20 })
         if (res?.data) {
           message.success("文章已发布")
-          navigate("/manage/articles")
+          setTimeout(() => navigate("/manage/articles"), 0)
         }
       }
     } finally {
@@ -160,7 +160,7 @@ const CreatePage: FC = () => {
                 placeholder="请输入文章标题..."
                 className="title-input"
                 maxLength={100}
-                bordered={false}
+                variant="borderless"
               />
             </Form.Item>
             <Divider style={{ margin: "0 0 16px" }} />
@@ -174,7 +174,7 @@ const CreatePage: FC = () => {
 
         {/* 右侧元信息面板 */}
         <div className="create-sidebar">
-          <Card title="文章设置" size="small" bordered={false}>
+          <Card title="文章设置" size="small" variant="borderless">
             <Form form={form} layout="vertical">
               <Form.Item label="摘要" name="summary">
                 <TextArea
