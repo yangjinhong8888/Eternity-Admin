@@ -1,8 +1,12 @@
-import { useEffect, useState, type FC } from "react"
-import { Outlet } from "react-router"
+import { useEffect, useMemo, useState, type FC } from "react"
+import { Outlet, useLocation, useNavigate } from "react-router"
 import { Layout, Menu } from "antd"
 import { usePrefixCls } from "@/hooks/usePrefixCls"
-import { menuItems } from "@/config/menu/menuConfig"
+import {
+  getMenuPathByKey,
+  getMenuStateByPath,
+  menuItems,
+} from "@/config/menu/menuConfig"
 import { getBelowBreakpointQuery } from "@/config/antd/breakpoints"
 import AdminHeader from "@/components/Layout/Header/AdminHeader"
 import AdminFooter from "@/components/Layout/Footer/AdminFooter"
@@ -18,7 +22,15 @@ const getInitialCollapsed = (): boolean => {
 
 const AdminLayout: FC = () => {
   const prefixCls = usePrefixCls("layout")
-  const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(getInitialCollapsed)
+  const navigate = useNavigate()
+  const location = useLocation()
+  const [sidebarCollapsed, setSidebarCollapsed] =
+    useState<boolean>(getInitialCollapsed)
+  const menuState = useMemo(
+    () => getMenuStateByPath(location.pathname),
+    [location.pathname]
+  )
+  const [openKeys, setOpenKeys] = useState<string[]>(menuState.openKeys)
 
   useEffect(() => {
     const mediaQueryList = window.matchMedia(LG_DOWN_MEDIA_QUERY)
@@ -34,6 +46,10 @@ const AdminLayout: FC = () => {
     }
   }, [])
 
+  useEffect(() => {
+    setOpenKeys(menuState.openKeys)
+  }, [menuState.openKeys])
+
   return (
     <Layout className={`${prefixCls}`}>
       <Sider
@@ -47,7 +63,15 @@ const AdminLayout: FC = () => {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={[menuItems[0]?.key as string]}
+          selectedKeys={menuState.selectedKeys}
+          openKeys={openKeys}
+          onOpenChange={keys => setOpenKeys(keys as string[])}
+          onClick={({ key }) => {
+            const targetPath = getMenuPathByKey(String(key))
+            if (targetPath && targetPath !== location.pathname) {
+              navigate(targetPath)
+            }
+          }}
           items={menuItems}
         />
       </Sider>

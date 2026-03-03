@@ -24,6 +24,12 @@ export interface MenuConfig {
   children?: MenuConfig[]
 }
 
+interface MenuNodeMeta {
+  key: string
+  path?: string
+  parentKeys: string[]
+}
+
 /**
  * 创建菜单项的辅助函数
  */
@@ -122,3 +128,58 @@ export const transformMenuConfig = (configs: MenuConfig[]): MenuItem[] => {
  * 导出转换后的菜单项
  */
 export const menuItems: MenuItem[] = transformMenuConfig(menuConfigData)
+
+const isPathMatched = (pathname: string, menuPath: string): boolean => {
+  if (menuPath === "/") return pathname === "/"
+  return pathname === menuPath || pathname.startsWith(`${menuPath}/`)
+}
+
+const collectMenuNodeMeta = (
+  configs: MenuConfig[],
+  parentKeys: string[] = []
+): MenuNodeMeta[] => {
+  return configs.flatMap(config => {
+    const currentMeta: MenuNodeMeta = {
+      key: config.key,
+      path: config.path,
+      parentKeys,
+    }
+
+    const childMeta = config.children
+      ? collectMenuNodeMeta(config.children, [...parentKeys, config.key])
+      : []
+
+    return [currentMeta, ...childMeta]
+  })
+}
+
+const menuNodeMetaList = collectMenuNodeMeta(menuConfigData)
+const menuPathMap = new Map(
+  menuNodeMetaList
+    .filter(meta => Boolean(meta.path))
+    .map(meta => [meta.key, meta.path as string])
+)
+
+export const getMenuPathByKey = (key: string): string | undefined => {
+  return menuPathMap.get(key)
+}
+
+export const getMenuStateByPath = (
+  pathname: string
+): { selectedKeys: string[]; openKeys: string[] } => {
+  const matched = menuNodeMetaList
+    .filter(meta => meta.path && isPathMatched(pathname, meta.path))
+    .sort((a, b) => (b.path?.length ?? 0) - (a.path?.length ?? 0))[0]
+
+  if (!matched) {
+    return {
+      selectedKeys: [],
+      openKeys: [],
+    }
+  }
+
+  return {
+    selectedKeys: [matched.key],
+    openKeys: matched.parentKeys,
+  }
+}

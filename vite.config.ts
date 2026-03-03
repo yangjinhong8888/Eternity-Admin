@@ -16,11 +16,16 @@ export default defineConfig({
     proxy: {
       "/admin/": {
         // 代理目标地址，需要配置实际的后端服务地址
-        target: "http://127.0.0.1:8080",
+        target: "http://127.0.0.1:8081",
         // 是否改变请求头中的 origin 字段，设置为 true 以适应某些安全策略
         changeOrigin: true,
         // 重写请求路径，移除 /admin 前缀
         rewrite: path => path.replace(/^\/admin/, ""),
+      },
+      // 代理图片静态资源请求到 admin-web，使相对路径图片可正常预览
+      "/uploads": {
+        target: "http://127.0.0.1:8081",
+        changeOrigin: true,
       },
     },
   },

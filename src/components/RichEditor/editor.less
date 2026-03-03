@@ -1,0 +1,150 @@
+.rich-editor {
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+
+  &:focus-within {
+    border-color: #1677ff;
+    box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.1);
+  }
+
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    padding: 6px 8px;
+    border-bottom: 1px solid #f0f0f0;
+    background: #fafafa;
+
+    .toolbar-divider {
+      width: 1px;
+      height: 24px;
+      background: #e8e8e8;
+      margin: 0 4px;
+      align-self: center;
+    }
+
+    .ant-btn {
+      padding: 0 6px;
+      height: 28px;
+      font-size: 13px;
+
+      &.is-active {
+        color: #1677ff;
+        background: #e6f4ff;
+        border-color: #91caff;
+      }
+    }
+  }
+
+  .editor-content {
+    min-height: 400px;
+    padding: 16px;
+    outline: none;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #333;
+
+    /* 标题样式 */
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 1em 0 0.5em;
+      line-height: 1.3;
+    }
+    h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin: 1em 0 0.5em;
+      line-height: 1.3;
+    }
+    h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 1em 0 0.5em;
+      line-height: 1.3;
+    }
+
+    /* 列表样式 */
+    ul,
+    ol {
+      padding-left: 1.5em;
+      margin: 0.5em 0;
+    }
+
+    /* 引用样式 */
+    blockquote {
+      border-left: 4px solid #1677ff;
+      padding: 4px 12px;
+      margin: 0.5em 0;
+      color: #666;
+      background: #f0f7ff;
+      border-radius: 0 4px 4px 0;
+    }
+
+    /* 代码块样式 */
+    pre {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      border-radius: 6px;
+      padding: 16px;
+      margin: 0.5em 0;
+      overflow-x: auto;
+      font-family: "Fira Code", "Consolas", monospace;
+      font-size: 13px;
+      line-height: 1.6;
+
+      code {
+        background: none;
+        padding: 0;
+        font-size: inherit;
+        color: inherit;
+      }
+    }
+
+    /* 行内代码 */
+    code {
+      background: #f0f2f5;
+      color: #eb5757;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: "Fira Code", "Consolas", monospace;
+      font-size: 13px;
+    }
+
+    /* 分割线 */
+    hr {
+      border: none;
+      border-top: 1px solid #e8e8e8;
+      margin: 1em 0;
+    }
+
+    /* 超链接 */
+    a {
+      color: #1677ff;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* 图片 */
+    img {
+      max-width: 100%;
+      border-radius: 4px;
+      cursor: default;
+
+      &.ProseMirror-selectednode {
+        outline: 2px solid #1677ff;
+      }
+    }
+
+    /* 占位提示 */
+    p.is-editor-empty:first-child::before {
+      content: attr(data-placeholder);
+      color: #bfbfbf;
+      pointer-events: none;
+      float: left;
+      height: 0;
+    }
+  }
+}

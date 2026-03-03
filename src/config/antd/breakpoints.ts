@@ -22,11 +22,13 @@ export const antdScreenTokens = {
   screenSMMax: breakpointMin.md,
   screenSM: breakpointMin.sm,
   screenSMMin: breakpointMin.sm,
-  screenXSMax: breakpointMin.xs - 1,
+  screenXSMax: breakpointMin.sm - 1,
   screenXS: breakpointMin.xs,
   screenXSMin: breakpointMin.xs,
 } as const
 
-export const getBelowBreakpointQuery = (breakpoint: keyof typeof breakpointMin): string => {
+export const getBelowBreakpointQuery = (
+  breakpoint: keyof typeof breakpointMin
+): string => {
   return `(max-width: ${breakpointMin[breakpoint] - 0.02}px)`
 }
