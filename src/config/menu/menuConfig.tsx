@@ -59,16 +59,15 @@ export const menuConfigData: MenuConfig[] = [
     path: "/",
   },
   {
-    label: "创作",
-    key: "2",
-    icon: <DesktopOutlined />,
-    path: "/create",
-  },
-  {
-    label: "管理",
+    label: "内容管理",
     key: "sub1",
-    icon: <UserOutlined />,
+    icon: <FileOutlined />,
     children: [
+      {
+        label: "写文章",
+        key: "2",
+        path: "/create",
+      },
       {
         label: "文章管理",
         key: "3",
@@ -79,21 +78,33 @@ export const menuConfigData: MenuConfig[] = [
         key: "4",
         path: "/manage/tags",
       },
+    ],
+  },
+  {
+    label: "用户管理",
+    key: "sub2",
+    icon: <UserOutlined />,
+    children: [
       {
-        label: "用户管理",
+        label: "用户列表",
         key: "5",
         path: "/manage/users",
       },
     ],
   },
   {
-    label: "权限",
-    key: "sub2",
+    label: "权限管理",
+    key: "sub3",
     icon: <TeamOutlined />,
     children: [
       {
-        label: "用户权限",
+        label: "角色管理",
         key: "6",
+        path: "/permission/roles",
+      },
+      {
+        label: "用户权限",
+        key: "7",
         path: "/permission/users",
       },
       {
@@ -104,9 +115,9 @@ export const menuConfigData: MenuConfig[] = [
     ],
   },
   {
-    label: "系统",
+    label: "系统设置",
     key: "9",
-    icon: <FileOutlined />,
+    icon: <DesktopOutlined />,
     path: "/system",
   },
 ]
