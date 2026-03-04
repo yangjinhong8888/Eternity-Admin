@@ -6,7 +6,10 @@ import NotFound from "@/pages/notfound/NotFound"
 import CreatePage from "@/pages/create"
 import ArticlesPage from "@/pages/manage/articles"
 import TagsPage from "@/pages/manage/tags"
+import UsersPage from "@/pages/manage/users"
+import RolesPage from "@/pages/permission/roles"
 import { userInfoLoader } from "@/routes/loader"
+import Test from "@/pages/test"
 
 const router = createBrowserRouter([
   {
@@ -31,7 +34,19 @@ const router = createBrowserRouter([
         path: "manage/tags",
         Component: TagsPage,
       },
+      {
+        path: "manage/users",
+        Component: UsersPage,
+      },
+      {
+        path: "permission/roles",
+        Component: RolesPage,
+      },
     ],
+  },
+  {
+    path:"/test",
+    Component: Test,
   },
   {
     path: "/login",

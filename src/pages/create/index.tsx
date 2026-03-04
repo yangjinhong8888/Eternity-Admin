@@ -117,11 +117,12 @@ const CreatePage: FC = () => {
       if (isEdit) {
         await articleService.update({ id: articleId, ...data })
         message.success("草稿已保存")
+        setTimeout(() => navigate("/manage/articles"), 0)
       } else {
         const res = await articleService.create(data)
         if (res?.data) {
           message.success("草稿已保存")
-          setTimeout(() => navigate(`/create?id=${res.data}`, { replace: true }), 0)
+          setTimeout(() => navigate("/manage/articles"), 0)
         }
       }
     } finally {
@@ -137,6 +138,7 @@ const CreatePage: FC = () => {
       if (isEdit) {
         await articleService.update({ id: articleId, ...data, status: 20 })
         message.success("文章已发布")
+        setTimeout(() => navigate("/manage/articles"), 0)
       } else {
         const res = await articleService.create({ ...data, status: 20 })
         if (res?.data) {
